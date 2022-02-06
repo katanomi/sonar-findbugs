@@ -50,7 +50,8 @@ public class FindbugsSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(FindbugsSensor.class);
 
   public static final String[] REPOS = {FindbugsRulesDefinition.REPOSITORY_KEY, FbContribRulesDefinition.REPOSITORY_KEY,
-          FindSecurityBugsRulesDefinition.REPOSITORY_KEY, FindSecurityBugsJspRulesDefinition.REPOSITORY_KEY
+          FindSecurityBugsRulesDefinition.REPOSITORY_KEY, FindSecurityBugsJspRulesDefinition.REPOSITORY_KEY,
+          AlaudaRulesDefinition.REPOSITORY_KEY
   };
 
   private List<String> repositories = new ArrayList<String>();
@@ -104,14 +105,18 @@ public class FindbugsSensor implements Sensor {
     return hasActiveRules(FindSecurityBugsRulesDefinition.REPOSITORY_KEY);
   }
 
+  private boolean hasActiveAlaudaRules() {
+    return hasActiveRules(AlaudaRulesDefinition.REPOSITORY_KEY);
+  }
+
   @Override
   public void execute(SensorContext context) {
 
-    if (!hasActiveFindbugsRules() && !hasActiveFbContribRules() && !hasActiveFindSecBugsRules()) {
+    if (!hasActiveFindbugsRules() && !hasActiveFbContribRules() && !hasActiveFindSecBugsRules() && !hasActiveAlaudaRules()) {
       return;
     }
 
-    Collection<ReportedBug> collection = executor.execute(hasActiveFbContribRules(), hasActiveFindSecBugsRules());
+    Collection<ReportedBug> collection = executor.execute(hasActiveFbContribRules(), hasActiveFindSecBugsRules(), hasActiveAlaudaRules());
 
     try {
 

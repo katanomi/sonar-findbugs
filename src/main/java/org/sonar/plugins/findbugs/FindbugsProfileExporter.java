@@ -27,6 +27,7 @@ import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.findbugs.rules.AlaudaRulesDefinition;
 import org.sonar.plugins.findbugs.rules.FbContribRulesDefinition;
 import org.sonar.plugins.findbugs.rules.FindSecurityBugsRulesDefinition;
 import org.sonar.plugins.findbugs.rules.FindbugsRulesDefinition;
@@ -49,7 +50,8 @@ public class FindbugsProfileExporter extends ProfileExporter {
               profile.getActiveRules().stream().filter(activeRule ->
                       activeRule.getRepositoryKey().contains(FindbugsRulesDefinition.REPOSITORY_KEY) ||
                               activeRule.getRepositoryKey().contains(FindSecurityBugsRulesDefinition.REPOSITORY_KEY) ||
-                              activeRule.getRepositoryKey().contains(FbContribRulesDefinition.REPOSITORY_KEY))
+                              activeRule.getRepositoryKey().contains(FbContribRulesDefinition.REPOSITORY_KEY) ||
+                              activeRule.getRepositoryKey().contains(AlaudaRulesDefinition.REPOSITORY_KEY))
                       .collect(Collectors.toList())
       );
       XStream xstream = FindBugsFilter.createXStream();
@@ -64,7 +66,10 @@ public class FindbugsProfileExporter extends ProfileExporter {
     for (ActiveRule activeRule : activeRules) {
       String repoKey = activeRule.getRepositoryKey();
 
-      if (repoKey.contains(FindSecurityBugsRulesDefinition.REPOSITORY_KEY) || repoKey.contains(FindbugsRulesDefinition.REPOSITORY_KEY) || repoKey.contains(FbContribRulesDefinition.REPOSITORY_KEY)) {
+      if (repoKey.contains(FindSecurityBugsRulesDefinition.REPOSITORY_KEY) ||
+              repoKey.contains(FindbugsRulesDefinition.REPOSITORY_KEY) ||
+              repoKey.contains(FbContribRulesDefinition.REPOSITORY_KEY) ||
+              repoKey.contains(AlaudaRulesDefinition.REPOSITORY_KEY)) {
         Match child = new Match();
         child.setBug(new Bug(activeRule.getConfigKey()));
         root.addMatch(child);
