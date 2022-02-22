@@ -32,10 +32,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.NewBuiltInA
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.NewBuiltInQualityProfile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonar.plugins.findbugs.rules.FbContribRulesDefinition;
-import org.sonar.plugins.findbugs.rules.FindSecurityBugsJspRulesDefinition;
-import org.sonar.plugins.findbugs.rules.FindSecurityBugsRulesDefinition;
-import org.sonar.plugins.findbugs.rules.FindbugsRulesDefinition;
+import org.sonar.plugins.findbugs.rules.*;
 import org.sonar.plugins.findbugs.xml.FindBugsFilter;
 
 import java.io.Reader;
@@ -78,9 +75,12 @@ public class FindbugsProfileImporter {
       if (rule == null) {
         rule = ruleFinder.findByKey(FbContribRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
         if (rule == null) {
-          rule = ruleFinder.findByKey(FindSecurityBugsRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
+          rule = ruleFinder.findByKey(AlaudaRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
           if (rule == null) {
-            rule = ruleFinder.findByKey(FindSecurityBugsJspRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
+            rule = ruleFinder.findByKey(FindSecurityBugsRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
+            if (rule == null) {
+              rule = ruleFinder.findByKey(FindSecurityBugsJspRulesDefinition.REPOSITORY_KEY, patternLevel.getKey());
+            }
           }
         }
       }
@@ -155,6 +155,7 @@ public class FindbugsProfileImporter {
   private Iterable<Rule> rules() {
     return Iterables.concat(
       ruleFinder.findAll(RuleQuery.create().withRepositoryKey(FindbugsRulesDefinition.REPOSITORY_KEY)),
+      ruleFinder.findAll(RuleQuery.create().withRepositoryKey(AlaudaRulesDefinition.REPOSITORY_KEY)),
       ruleFinder.findAll(RuleQuery.create().withRepositoryKey(FbContribRulesDefinition.REPOSITORY_KEY)),
       ruleFinder.findAll(RuleQuery.create().withRepositoryKey(FindSecurityBugsRulesDefinition.REPOSITORY_KEY)),
       ruleFinder.findAll(RuleQuery.create().withRepositoryKey(FindSecurityBugsJspRulesDefinition.REPOSITORY_KEY)));

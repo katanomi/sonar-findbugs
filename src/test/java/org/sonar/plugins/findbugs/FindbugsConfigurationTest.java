@@ -132,24 +132,29 @@ public class FindbugsConfigurationTest {
   public void should_copy_lib_in_working_dir() throws IOException {
     String jsr305 = "findbugs/jsr305.jar";
     String annotations = "findbugs/annotations.jar";
+    String sonarWay = "findbugs/sonar-java-plugin.jar";
 
     // stop at start
     conf.stop();
     assertThat(new File(fs.workDir(), jsr305)).doesNotExist();
     assertThat(new File(fs.workDir(), annotations)).doesNotExist();
+    assertThat(new File(fs.workDir(), sonarWay)).doesNotExist();
 
     conf.copyLibs();
     assertThat(new File(fs.workDir(), jsr305)).isFile();
     assertThat(new File(fs.workDir(), annotations)).isFile();
+    assertThat(new File(fs.workDir(), sonarWay)).isFile();
 
     // copy again
     conf.copyLibs();
     assertThat(new File(fs.workDir(), jsr305)).isFile();
     assertThat(new File(fs.workDir(), annotations)).isFile();
+    assertThat(new File(fs.workDir(), sonarWay)).isFile();
 
     conf.stop();
     assertThat(new File(fs.workDir(), jsr305)).doesNotExist();
     assertThat(new File(fs.workDir(), annotations)).doesNotExist();
+    assertThat(new File(fs.workDir(), sonarWay)).doesNotExist();
 
   }
 
@@ -163,6 +168,12 @@ public class FindbugsConfigurationTest {
   public void should_get_findSecBugs() throws IOException {
     conf.copyLibs();
     assertThat(conf.getFindSecBugsJar()).isFile();
+  }
+
+  @Test
+  public void should_get_sonarWay() throws IOException {
+    conf.copyLibs();
+    assertThat(conf.getSonarWayJar()).isFile();
   }
 
 }

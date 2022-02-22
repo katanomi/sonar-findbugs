@@ -4,7 +4,7 @@
 
   <groupId>com.github.spotbugs</groupId>
   <artifactId>sonar-findbugs-plugin</artifactId>
-  <version>4.0.5</version>
+  <version>4.0.5.1</version>
   <packaging>sonar-plugin</packaging>
 
   <name>SonarQube SpotBugs Plugin</name>
@@ -59,6 +59,7 @@
     <surefire.version>3.0.0-M5</surefire.version>
     <sonar.version>7.9</sonar.version>
     <sonar-java.version>5.13.1.18282</sonar-java.version>
+    <!--sonar-java.version>7.8.0.28662</sonar-java.version-->
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -86,7 +87,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
 
     <dependency>
       <groupId>org.sonarsource.sslr-squid-bridge</groupId>
@@ -205,7 +205,6 @@
       <scope>test</scope>
     </dependency>
 
-
     <!-- Utilities use by the lexer -->
     <dependency>
       <groupId>org.sonarsource.sslr</groupId>
@@ -311,7 +310,6 @@
           <target>${jdk.min.version}</target>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -349,9 +347,6 @@
           <useModulePath>false</useModulePath>
         </configuration>
       </plugin>
-
-
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -365,7 +360,7 @@
             <configuration>
               <stripVersion>true</stripVersion>
               <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-              <includeArtifactIds>annotations,jsr305,sb-contrib,findsecbugs-plugin</includeArtifactIds>
+              <includeArtifactIds>annotations,jsr305,sb-contrib,findsecbugs-plugin,sonar-java-plugin</includeArtifactIds>
             </configuration>
           </execution>
         </executions>
@@ -455,6 +450,19 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>alauda-plugin</id>
+      <name>alauda-plugin</name>
+      <url>https://build-nexus.alauda.cn/repository/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
   <profiles>
     <profile>
       <id>travis</id>
