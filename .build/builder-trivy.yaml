@@ -23,6 +23,9 @@ spec:
         - name: command
           value: mvn clean install deploy -U -Dmaven.test.skip=true -Dmaven.site.skip=true
             -Dmaven.javadoc.skip=true
+        - name: dependencies-repositories
+          value:
+            - https://build-nexus.alauda.cn/repository/alauda-maven/
         - name: generated-artifacts
           value:
             - ./target/sonar-findbugs-plugin.jar
