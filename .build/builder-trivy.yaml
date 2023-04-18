@@ -21,8 +21,8 @@ spec:
         - name: tool-image
           value: registry.alauda.cn:60080/devops/builder-java:17.0.6-openjdk-30dc2aac
         - name: command
-          value: mvn clean install deploy -U -Dmaven.test.skip=true -Dmaven.site.skip=true
-            -Dmaven.javadoc.skip=true
+          value: mvn clean install deploy -X -U -Dmaven.test.skip=true
+            -Dmaven.site.skip=true -Dmaven.javadoc.skip=true
         - name: dependencies-repositories
           value:
             - https://build-nexus.alauda.cn/repository/alauda-maven/
