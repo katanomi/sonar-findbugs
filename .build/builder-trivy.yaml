@@ -30,7 +30,7 @@ spec:
           value:
             - ./target/sonar-findbugs-plugin.jar
         - name: deploy-repository
-          value: https://build-nexus.alauda.cn/repository/maven-snapshots/
+          value: https://build-nexus.alauda.cn/repository/alauda-maven/
   git:
     options:
       depth: 1
