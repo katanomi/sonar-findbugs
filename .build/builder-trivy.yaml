@@ -1,0 +1,45 @@
+apiVersion: builds.katanomi.dev/v1alpha1
+kind: Build
+spec:
+  workspaces:
+    - description: >
+        This workspace is shared among all the pipeline tasks to read/write
+        common resources
+      name: source
+  tasks:
+    - name: maven-install-deploy
+      timeout: 30m
+      retries: 0
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: source
+      when: []
+      params:
+        - name: tool-image
+          value: registry.alauda.cn:60080/devops/builder-java:17.0.6-openjdk-30dc2aac
+        - name: command
+          value: mvn clean install deploy -U -Dmaven.test.skip=true -Dmaven.site.skip=true
+            -Dmaven.javadoc.skip=true
+        - name: generated-artifacts
+          value:
+            - ./target/sonar-findbugs-plugin.jar
+        - name: deploy-repository
+          value: https://build-nexus.alauda.cn/repository/alauda-maven/
+  git:
+    options:
+      depth: 1
+      timeout: 10m
+      retries: 0
+      resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+        requests:
+          cpu: 200m
+          memory: 200Mi
+  runTemplate:
+    spec:
+      taskRunSpecs: []
