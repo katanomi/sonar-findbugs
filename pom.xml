@@ -446,7 +446,7 @@
   </build>
   <distributionManagement>
     <repository>  
-      <id>ossrh</id>
+      <id>build-nexus-alauda-cn-repository-alauda</id>
       <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
     </repository>
     <snapshotRepository>
@@ -535,8 +535,8 @@
             <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
-               <serverId>ossrh</serverId>
-               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+               <serverId>build-nexus-alauda-cn-repository-alauda</serverId>
+               <nexusUrl>https://build-nexus.alauda.cn/repository/alauda-maven/</nexusUrl>
                <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
