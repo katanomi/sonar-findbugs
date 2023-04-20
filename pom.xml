@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.spotbugs</groupId>
@@ -114,7 +116,8 @@
     </dependency>
 
     <dependency>
-      <!-- For some reasons was not deployed with FindBugs 2.0.3 and not transitive dependency anymore -->
+      <!-- For some reasons was not deployed with FindBugs 2.0.3 and not transitive dependency
+      anymore -->
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
       <version>3.0.1u2</version>
@@ -217,6 +220,15 @@
       <version>4.2</version>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>24.1.1-jre</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -284,19 +296,19 @@
           <version>3.0.0-M1</version>
         </plugin>
         <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-surefire-plugin</artifactId>
-         <version>${surefire.version}</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${surefire.version}</version>
         </plugin>
         <plugin>
-         <groupId>org.jacoco</groupId>
-         <artifactId>jacoco-maven-plugin</artifactId>
-         <version>0.8.6</version>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.6</version>
         </plugin>
         <plugin>
-         <groupId>org.apache.maven.plugins</groupId>
-         <artifactId>maven-javadoc-plugin</artifactId>
-         <version>3.2.0</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.2.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -379,7 +391,8 @@
             </manifestEntries>
           </archive>
           <pluginName>Findbugs</pluginName>
-          <pluginDescription>Analyze Java, Scala, Closure and JSP code with SpotBugs. ${spotbugs.version}</pluginDescription>
+          <pluginDescription>Analyze Java, Scala, Closure and JSP code with SpotBugs.
+            ${spotbugs.version}</pluginDescription>
           <pluginClass>org.sonar.plugins.findbugs.FindbugsPlugin</pluginClass>
           <useChildFirstClassLoader>false</useChildFirstClassLoader>
           <requirePlugins>java:${sonar-java.version}</requirePlugins>
@@ -432,10 +445,10 @@
                   <pattern>org.apache.commons.io</pattern>
                   <shadedPattern>shaded.io</shadedPattern>
                 </relocation>
-                  <relocation>
-                    <pattern>org.sonar.channel</pattern>
-                    <shadedPattern>shaded.channel</shadedPattern>
-                  </relocation>
+                <relocation>
+                  <pattern>org.sonar.channel</pattern>
+                  <shadedPattern>shaded.channel</shadedPattern>
+                </relocation>
               </relocations>
               <createDependencyReducedPom>false</createDependencyReducedPom>
             </configuration>
@@ -446,12 +459,12 @@
   </build>
   <distributionManagement>
     <repository>  
-      <id>build-nexus-alauda-cn-repository-alauda</id>
-      <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <snapshotRepository>
       <id>ossrh</id>
-      <url>https://build-nexus.alauda.cn/repository/maven-snapshots</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
   <pluginRepositories>
@@ -535,9 +548,9 @@
             <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
-               <serverId>build-nexus-alauda-cn-repository-alauda</serverId>
-               <nexusUrl>https://build-nexus.alauda.cn/repository/alauda-maven/</nexusUrl>
-               <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
         </plugins>
