@@ -459,7 +459,7 @@
   </build>
   <distributionManagement>
     <repository>  
-      <id>build-nexus-alauda-cn-repository-alauda-maven</id>
+      <id>ossrh</id>
       <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
     </repository>
   </distributionManagement>
@@ -544,7 +544,7 @@
             <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
-              <serverId>build-nexus-alauda-cn-repository-alauda-maven</serverId>
+              <serverId>ossrh</serverId>
               <nexusUrl>https://build-nexus.alauda.cn/repository/alauda-maven/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
