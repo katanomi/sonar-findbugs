@@ -459,13 +459,9 @@
   </build>
   <distributionManagement>
     <repository>  
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>build-nexus-alauda-cn-repository-alauda-maven</id>
+      <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
     </repository>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
   </distributionManagement>
   <pluginRepositories>
     <pluginRepository>
@@ -548,8 +544,8 @@
             <version>1.6.8</version>
             <extensions>true</extensions>
             <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <serverId>build-nexus-alauda-cn-repository-alauda-maven</serverId>
+              <nexusUrl>https://build-nexus.alauda.cn/repository/alauda-maven/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
           </plugin>
