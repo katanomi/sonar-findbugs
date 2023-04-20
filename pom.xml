@@ -447,11 +447,11 @@
   <distributionManagement>
     <repository>  
       <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
     </repository>
     <snapshotRepository>
       <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <url>https://build-nexus.alauda.cn/repository/maven-snapshots</url>
     </snapshotRepository>
   </distributionManagement>
   <pluginRepositories>
