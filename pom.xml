@@ -459,7 +459,7 @@
   </build>
   <distributionManagement>
     <repository>  
-      <id>ossrh</id>
+      <id>build-nexus-alauda-cn-repository-alauda-maven</id>
       <url>https://build-nexus.alauda.cn/repository/alauda-maven</url>
     </repository>
   </distributionManagement>
